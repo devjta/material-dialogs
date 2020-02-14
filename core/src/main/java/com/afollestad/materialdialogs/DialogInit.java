@@ -518,6 +518,9 @@ class DialogInit {
     dialog.setTypeface(dialog.input, builder.regularFont);
     if (builder.inputPrefill != null) {
       dialog.input.setText(builder.inputPrefill);
+      if(builder.inputSelectPreFill){
+        dialog.input.setSelected(true);
+      }
     }
     dialog.setInternalInputCallback();
     dialog.input.setHint(builder.inputHint);

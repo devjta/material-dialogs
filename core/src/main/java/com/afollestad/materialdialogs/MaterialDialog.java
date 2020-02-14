@@ -1143,6 +1143,7 @@ public class MaterialDialog extends DialogBase
     protected CharSequence inputPrefill;
     protected CharSequence inputHint;
     protected InputCallback inputCallback;
+    protected boolean inputSelectPreFill;
     protected boolean inputAllowEmpty;
     protected int inputType = -1;
     protected boolean alwaysCallInputCallback;
@@ -2088,7 +2089,8 @@ public class MaterialDialog extends DialogBase
         @Nullable CharSequence hint,
         @Nullable CharSequence prefill,
         boolean allowEmptyInput,
-        @NonNull InputCallback callback) {
+        @NonNull InputCallback callback,
+        boolean selectPreFill) {
       if (this.customView != null) {
         throw new IllegalStateException(
             "You cannot set content() when " + "you're using a custom view.");
@@ -2097,14 +2099,24 @@ public class MaterialDialog extends DialogBase
       this.inputHint = hint;
       this.inputPrefill = prefill;
       this.inputAllowEmpty = allowEmptyInput;
+      this.inputSelectPreFill = selectPreFill;
       return this;
     }
+
+    public Builder input(
+            @Nullable CharSequence hint,
+            @Nullable CharSequence prefill,
+            @NonNull InputCallback callback,
+            boolean selectPreFill) {
+      return input(hint, prefill, true, callback, selectPreFill);
+    }
+
 
     public Builder input(
         @Nullable CharSequence hint,
         @Nullable CharSequence prefill,
         @NonNull InputCallback callback) {
-      return input(hint, prefill, true, callback);
+      return input(hint, prefill, true, callback, false);
     }
 
     public Builder input(
@@ -2116,7 +2128,7 @@ public class MaterialDialog extends DialogBase
           hint == 0 ? null : context.getText(hint),
           prefill == 0 ? null : context.getText(prefill),
           allowEmptyInput,
-          callback);
+          callback, false);
     }
 
     public Builder input(
