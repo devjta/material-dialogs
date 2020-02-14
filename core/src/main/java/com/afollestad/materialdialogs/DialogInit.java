@@ -519,7 +519,7 @@ class DialogInit {
     if (builder.inputPrefill != null) {
       dialog.input.setText(builder.inputPrefill);
       if(builder.inputSelectPreFill){
-        dialog.input.setSelected(true);
+        dialog.input.setSelectAllOnFocus(true);
       }
     }
     dialog.setInternalInputCallback();
